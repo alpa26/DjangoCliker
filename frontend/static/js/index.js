@@ -44,3 +44,51 @@ function add_boost(parent, boost) {
     parent.appendChild(button)
 }
 
+function getCookie(name) { 
+    let cookieValue = null; 
+    if (document.cookie && document.cookie !== '') { 
+        const cookies = document.cookie.split(';'); 
+        for (let i = 0; i < cookies.length; i++) { 
+            const cookie = cookies[i].trim(); 
+            if (cookie.substring(0, name.length + 1) === (name + '=')) { 
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1)); 
+                break; 
+            } 
+        } 
+    } 
+    return cookieValue; 
+}
+
+function buy_boost(boost_id) { 
+    const csrftoken = getCookie('csrftoken') // Забираем токен из кукесов
+
+    fetch(`/boost/${boost_id}/`, { 
+        method: 'PUT', // Теперь метод POST, потому что мы изменяем данные в базе
+        headers: { // Headers - мета-данные запроса
+            "X-CSRFToken": csrftoken, // Токен для защиты от CSRF-атак, без него не будет работать
+            'Content-Type': 'application/json' 
+        }
+    }).then(response => { 
+        if (response.ok) return response.json() 
+        else return Promise.reject(response) 
+    }).then(response => {
+        if (response.error) return
+        const old_boost_stats = response.old_boost_stats
+        const new_boost_stats = response.new_boost_stats
+       
+        const coinsElement = document.getElementById('coins')
+        coinsElement.innerText = Number(coinsElement.innerText) - old_boost_stats.price
+        const powerElement = document.getElementById('click_power')
+        powerElement.innerText = Number(powerElement.innerText) + old_boost_stats.power
+
+        update_boost(new_boost_stats) // Обновляем буст на фронтике
+    }).catch(err => console.log(err)) 
+}
+
+function update_boost(boost) { 
+    const boost_node = document.getElementById(`boost_${boost.id}`) 
+    boost_node.querySelector('#boost_level').innerText = boost.level 
+    boost_node.querySelector('#boost_power').innerText = boost.power 
+    boost_node.querySelector('#boost_price').innerText = boost.price
+}
+
