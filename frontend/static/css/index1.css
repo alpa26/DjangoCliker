@@ -93,19 +93,6 @@ body{
     cursor: pointer;
     width: 20%;
 }
-h3{
-    text-align: center;
-    
-}
-.save{
-    height: 4%;
-    border-radius: 10px;
-    border: 0px;
-    background-color: #f0e14a;
-}
-.save:active{
-    background-color: rgb(241, 191, 98);
-}
 .power_d{
     border: 0px;
     background-color: rgb(241, 191, 98);
@@ -120,6 +107,16 @@ h3{
     text-align: center;
     width: 20%;
 }
+.save{
+    height: 4%;
+    border-radius: 10px;
+    border: 0px;
+    background-color: #f0e14a;
+}
+.save:active{
+    background-color: rgb(241, 191, 98);
+}
+
 .simpetext{
     height: 2%;
     font-size:21px;
@@ -138,4 +135,8 @@ h3{
     font-size:38px;
     color:#00bfff;
     -webkit-text-stroke: #002A46 1px;
+}
+h3{
+    text-align: center;
+    
 }

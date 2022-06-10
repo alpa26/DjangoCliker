@@ -53,14 +53,13 @@ def get_core(request):
 
 @api_view(['POST']) 
 def update_coins(request): 
-    coins = request.data['current_coins'] # Значение current_coins будем присылать в теле запроса.
+    coins = request.data['current_coins'] 
     core = Core.objects.get(user=request.user)
    
-    is_levelup, boost_type = core.set_coins(coins) # Метод set_coins скоро добавим в модель. Добавили boost_type для создания буста.
-   
-    # Дальнейшая логика осталась прежней, как в call_click
+    is_levelup, boost_type = core.set_coins(coins) 
+
     if is_levelup: 
-        Boost.objects.create(core=core, price=core.coins, power=core.level*2, type=boost_type) # Создание буста. Добавили атрибут type.
+        Boost.objects.create(core=core, price=core.coins, power=core.level*2, type=boost_type)
     
     core.save()
 
@@ -77,18 +76,18 @@ def user_logout(request):
 @login_required
 def index(request):
     core = Core.objects.get(user=request.user)
-    boosts = Boost.objects.filter(core=core) # Достаем бусты пользователя из базы
+    boosts = Boost.objects.filter(core=core)
    
     return render(request, 'index.html', {
         'core': core,
-        'boosts': boosts, # Возвращаем бусты на фронтик
+        'boosts': boosts, 
     })
 
 @api_view(['GET'])
 @login_required
 def call_click(request):
     core = Core.objects.get(user=request.user)
-    is_levelup = core.click() # Труе если буст создался
+    is_levelup = core.click() 
     if is_levelup:
         Boost.objects.create(core=core, price=core.coins, power=core.level*2)
     core.save()
@@ -100,10 +99,9 @@ class BoostViewSet(viewsets.ModelViewSet):
     queryset = Boost.objects.all() 
     serializer_class = BoostSerializer
 
-    # Переопределение метода get_queryset для получения бустов, привязанных к определенному ядру
     def get_queryset(self):
-        core = Core.objects.get(user=self.request.user) # Получение ядра пользователя
-        boosts = Boost.objects.filter(core=core) # Получение бустов ядра
+        core = Core.objects.get(user=self.request.user) 
+        boosts = Boost.objects.filter(core=core) 
         return boosts
 
     def partial_update(self, request, pk):

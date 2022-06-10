@@ -1,27 +1,9 @@
-body{
-    background-image: url("{% static 'img/background.png' %}");
-}
+
 .app {
     display: flex;
     flex-direction: row;
     width: 100%;
     height: 100%;
-}
-.nav {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    height: 100%;
-    padding-top: 5px;
-    padding-left: 15px;
-}
-.container {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
 }
 .pickle {
     margin: auto;
@@ -48,15 +30,4 @@ body{
     height: 50%;
     justify-content: center;
     align-items: center;
-}
-
-.meeseeks{
-    width: 50%;
-}
-
-.font{
-    color:#16ACC9;
-    font-size:60px;
-    -webkit-text-stroke: #002A46 2px;
-    font:Schwifty;
 }

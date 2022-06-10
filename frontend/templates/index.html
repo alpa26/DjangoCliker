@@ -6,12 +6,12 @@
     <script type="text/javascript" src="{% static 'js/index1.js' %}"></script>
     <style>
         body {
-        background-image: url("{% static 'img/background1.png' %}"); /* Цвет фона и путь к файлу */
+        background-image: url("{% static 'img/background1.png' %}"); 
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
         background-color: #386568;
-        color: #fff; /* Цвет текста */
+        color: #fff; 
         }
         </style>
 </head> 
@@ -32,7 +32,7 @@
                 <button class="power_d"> <img class="achiev3" src= "{% static 'img/scvonch.png' %}">Cила одного клика:  50</button>
             {% endif %}
         </div>
-            <div class="boosts-holder" id="boosts-holder">
+            <div>
             {% if core.click_power >= 250 %}
                 <button class="power_d"> <img class="achiev4" src= "{% static 'img/pngegg.png' %}">Cила одного клика: 250</button>
             {% endif %}
@@ -43,7 +43,7 @@
                 <button class="power_d"><img class="achiev6" src= "{% static 'img/pickle.png' %}"> Cила одного клика: 1000</button>
             {% endif %}
         </div>
-            <div class="boosts-holder" id="boosts-holder">
+            <div>
             {% if core.auto_click_power >= 10 %}
                 <button class="power_ab"> <img class="meeseekshead" src= "{% static 'img/headmeseeks.png' %}">Сила Мисиксов: 10 </button>
             {% endif %}

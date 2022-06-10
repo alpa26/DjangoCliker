@@ -8,7 +8,6 @@ function GameSession() {
     this.auto_click_power = 0
     this.next_level_price = 10
 
-    /** Метод для инициализации данных. Данные подгружаются с бэкенда. */
     this.init = function() {
         getCore().then(core => {
             this.coins = core.coins
@@ -18,23 +17,23 @@ function GameSession() {
             render()
         })
     }
-    /** Метод для добавления монеток. */
+    
     this.add_coins = function(coins) {
         this.coins += coins
         this.check_levelup()
         render()
     }
-    /** Метод для добавления невероятной мощи. */
+
     this.add_power = function(power) {
         this.click_power += power
         render()
     }
-    /** Метод для добавления дружинника в отряд автоматизированных кликуш. */
+
     this.add_auto_power = function(power) {
         this.auto_click_power += power
         render()
     }
-    /** Метод для проверки на повышения уровня. Отправка запроса на сохранение данных, если уровень повышен. */
+
     this.check_levelup = function() {
         if (this.coins >= this.next_level_price) {
             updateCoins(this.coins).then(core => {
@@ -44,7 +43,7 @@ function GameSession() {
     }
 }
 
-let Game = new GameSession() // Экземпляр класса GameSession.
+let Game = new GameSession() 
 
 function call_click() {
     const portalNode = document.getElementById('portal')
@@ -52,7 +51,6 @@ function call_click() {
     Game.add_coins(Game.click_power)
 }
 
-/** Функция для обновления количества монет, невероятной мощи и дружинных кликуш в HTML-элементах. */
 function render() {
     const coinsNode = document.getElementById('coins')
     const clickNode = document.getElementById('click_power')
@@ -62,7 +60,6 @@ function render() {
     autoClickNode.innerHTML = Game.auto_click_power
 }
 
-/** Функция для обновления буста на фронтике. */
 function update_boost(boost) { 
     const boost_node = document.getElementById(`boost_${boost.id}`) 
     boost_node.querySelector('#boost_level').innerText = boost.level 
@@ -70,7 +67,6 @@ function update_boost(boost) {
     boost_node.querySelector('#boost_price').innerText = boost.price
 }
 
-/** Функция для добавления буста на фронтике. */
 function add_boost(parent, boost) { 
     const button = document.createElement('button') 
     button.setAttribute('class', `boost_${boost.type}`) 
@@ -84,7 +80,6 @@ function add_boost(parent, boost) {
     parent.appendChild(button) 
 }
 
-/** Функция для анимации элемента, по которому происходит клик. */
 function click_animation(node, time_ms) {
     css_time = `.0${time_ms}s`
     node.style.cssText = `transition: all ${css_time} linear; transform: scale(0.95);`
@@ -93,7 +88,6 @@ function click_animation(node, time_ms) {
     }, time_ms)
 }
 
-/** Функция получения данных об игре пользователя с бэкенда. */
 function getCore() {
     return fetch('/core/', {
         method: 'GET'
@@ -107,7 +101,6 @@ function getCore() {
     }).catch(error => console.log(error)) 
 }
 
-/** Функция отправки данных о количестве монет пользователя на бэкенд. */
 function updateCoins(current_coins) { 
     const csrftoken = getCookie('csrftoken') 
     return fetch('/update_coins/', { 
@@ -132,7 +125,6 @@ function updateCoins(current_coins) {
     }).catch(error => console.log(error)) 
 }
 
-/** Функция получения имеющихся бустов пользователя с бэкенда. */
 function get_boosts() {
     return fetch('/boosts/', {
         method: 'GET'
@@ -150,7 +142,6 @@ function get_boosts() {
     }).catch(error => console.log(error))
 }
 
-/** Функция покупки буста. */
 function buy_boost(boost_id) { 
     const csrftoken = getCookie('csrftoken')
     return fetch(`/boost/${boost_id}/`, { 
@@ -176,14 +167,12 @@ function buy_boost(boost_id) {
         } else {
             Game.add_power(old_boost_stats.power)
         }
-        update_boost(new_boost_stats) // Обновляем буст на фронтике.
+        update_boost(new_boost_stats) 
     }).catch(err => console.log(err)) 
 }
 
-/** Функция обработки автоматического клика. */
 function setAutoClick() { 
     setInterval(function() {
-        /** Этот код срабатывает раз в секунду. */
         Game.add_coins(Game.auto_click_power)
     }, 1000) 
 }
@@ -191,20 +180,13 @@ function setAutoClick() {
 function save(){
     updateCoins(Game.coins) 
 }
-/** Функция обработки автоматического сохранения (отправки данных о количестве монет пользователя на бэкенд). */
 function setAutoSave() { 
     setInterval(function() {
-        /** Этот код срабатывает раз в минуту. */
         updateCoins(Game.coins) 
-    }, 10000) 
+    }, 60000) 
 }
 
-/** 
-    Функция для получения кукесов.
-    Она нужна для того, чтобы получить токен пользователя, который хранится в cookie.
-    Токен пользователя, в свою очередь, нужен для того, чтобы система распознала, что запросы защищены.
-    Без него POST и PUT запросы выполняться не будут, потому что так захотел Django.
-*/
+
 function getCookie(name) { 
     let cookieValue = null; 
     if (document.cookie && document.cookie !== '') { 
@@ -220,12 +202,9 @@ function getCookie(name) {
     return cookieValue; 
 }
 
-/** 
-* Эта функция автоматически вызывается сразу после загрузки страницы.
-* В ней мы можем делать что угодно.
-*/
+
 window.onload = function () {
-    Game.init() // Инициализация игры.
-    setAutoClick() // Инициализация автоклика.
-    /*setAutoSave()*/ // Инициализация автосейва.
+    Game.init() 
+    setAutoClick()
+    setAutoSave()
 }
