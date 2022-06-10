@@ -1,37 +1,99 @@
 {% load static %}
 <html lang="ru"> 
 <head> 
-    <title>Лучший кликер на планете</title>     
-    <link rel="stylesheet" href="{% static 'css/index.css' %}">
-    <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+    <title>Лучший кликер во вселенной</title>     
+    <link rel="stylesheet" href="{% static 'css/index1.css' %}" type="text/css">
+    <script type="text/javascript" src="{% static 'js/index1.js' %}"></script>
+    <style>
+        body {
+        background-image: url("{% static 'img/background1.png' %}"); /* Цвет фона и путь к файлу */
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        background-color: #386568;
+        color: #fff; /* Цвет текста */
+        }
+        </style>
 </head> 
 <body>
     <main class="app">
         <nav class="nav">
-            Привет, {{ user.username }}
-            <a href="{% url 'logout' %}">Выйти</a>
+            <p style="text-align: center ">Привет, {{ user.username }}</p>
+            <aside class="boosts" id="boosts"> 
+                <h3 class="font1" >Достижения</h3>
+            <div>
+            {% if core.coins >= 1 %}
+                <button class="power_d" > <img class="achiev1" src= "{% static 'img/Jerry.png' %}">Вы нажали на кнопку</button>
+            {% endif %}
+            {% if core.click_power >= 10 %}
+                <button class="power_d"><img class="achiev2" src= "{% static 'img/dog.png' %}">Cила одного клика: 10 </button>
+            {% endif %}
+            {% if core.click_power >= 50 %}
+                <button class="power_d"> <img class="achiev3" src= "{% static 'img/scvonch.png' %}">Cила одного клика:  50</button>
+            {% endif %}
+        </div>
+            <div class="boosts-holder" id="boosts-holder">
+            {% if core.click_power >= 250 %}
+                <button class="power_d"> <img class="achiev4" src= "{% static 'img/pngegg.png' %}">Cила одного клика: 250</button>
+            {% endif %}
+            {% if core.click_power >= 500 %}
+                <button class="power_d"> <img class="achiev5" src= "{% static 'img/morty.png' %}"> Cила одного клика: 500</button>
+            {% endif %}
+            {% if core.click_power >= 1000 %}
+                <button class="power_d"><img class="achiev6" src= "{% static 'img/pickle.png' %}"> Cила одного клика: 1000</button>
+            {% endif %}
+        </div>
+            <div class="boosts-holder" id="boosts-holder">
+            {% if core.auto_click_power >= 10 %}
+                <button class="power_ab"> <img class="meeseekshead" src= "{% static 'img/headmeseeks.png' %}">Сила Мисиксов: 10 </button>
+            {% endif %}
+            {% if core.auto_click_power >= 100 %}
+                <button class="power_ab"> <img class="meeseekshead" src= "{% static 'img/headmeseeks.png' %}"> Сила Мисиксов: 100 </button>
+            {% endif %}
+            {% if core.auto_click_power >= 200 %}
+                <button class="power_ab"> <img class="meeseekshead" src= "{% static 'img/headmeseeks.png' %}"> Сила Мисиксов: 200 </button>
+            {% endif %}
+            {% if core.auto_click_power >= 300 %}
+                <button class="power_ab"> <img class="meeseekshead" src= "{% static 'img/headmeseeks.png' %}">Сила Мисиксов: 300 </button>
+            {% endif %}
+            {% if core.auto_click_power >= 500 %}
+                <button class="power_ab"> <img class="meeseekshead" src= "{% static 'img/headmeseeks.png' %}">Сила Мисиксов: 500 </button>
+            {% endif %}
+            {% if core.auto_click_power >= 1000 %}
+                <button class="power_ab"> <img class="meeseekshead" src= "{% static 'img/headmeseeks.png' %}">Сила Мисиксов: 1000 </button>
+            {% endif %}
+        </div>
+            </aside>
         </nav>
-
+        <img class='drac' src= "{% static 'img/portal.png' %}" id="portal" onclick="call_click()">
         <div class="container">
-            <div id='coins'>{{core.coins}}</div> 
-            <button onclick="call_click()">Нажми меня</button>
-            <p>
-                Невероятная мощь клика: <span id="click_power">{{ core.click_power }}</span> 
+           
+        </div>
+        <div class="newcontainer">
+            <p class="simpetext">У вас есть <span  id='coins'>{{core.coins}}</span> Блемфларков</p>
+            <button class="save" onclick="save()">Save</button>
+            <p class="simpetext">
+                Сила клика <span id="click_power">{{ core.click_power }}</span> 
+            </p>
+            <p class="simpetext">
+                Сила Мисиксов <span id="auto_click_power">{{ core.auto_click_power }}</span> 
             </p>
         </div>
 
         <aside class="boosts" id="boosts"> 
-            <h3>Бусты</h3> 
+            <h3 class="font">Бусты</h3> 
             <div class="boosts-holder" id="boosts-holder"> 
-                {% for boost in boosts %} 
-                    <button class="boost" id="boost_{{boost.id}}" onclick="buy_boost({{boost.id}})"> 
-                        <p>lvl: <span id="boost_level">{{boost.level}}</span></p> 
-                        <p>+<span id="boost_power">{{boost.power}}</span></p> 
-                        <p><span id="boost_price">{{boost.price}}</span></p> 
-                    </button> 
-                {% endfor %} 
+                {% for boost in boosts %}   
+                    <button class="boost_{{boost.type}}" id="boost_{{boost.id}}" onclick="buy_boost({{boost.id}})">  
+                        <img class="meeseeks" src= "{% static 'img/Mr.Meeseeks.png' %}">
+                        <p hidden>lvl: <span id="boost_level">{{boost.level}}</span></p>   
+                        <p>+<span id="boost_power">{{boost.power}}</span></p>   
+                        <p><span id="boost_price">{{boost.price}}</span></p>   
+                    </button>   
+                {% endfor %}
             </div> 
         </aside>
+        <a href="{% url 'logout' %}" style="color: #fff;">Leave</a>
     </main>
 </body> 
 </html>

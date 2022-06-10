@@ -1,0 +1,64 @@
+body{
+    background-image: url("{% static 'img/background.png' %}");
+}
+.app {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+.nav {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    height: 100%;
+    padding-top: 5px;
+    padding-left: 15px;
+}
+.container {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.boosts {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    height: 100%;
+    
+}
+
+.newcontainer {
+    margin: auto;
+    position: absolute;
+    top: 40%; left: 0; bottom: 40%; right: 7%;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    height: 50%;
+    justify-content: center;
+    align-items: center;
+}
+
+.meeseeks{
+    width: 50%;
+}
+
+.text{
+    margin: auto;
+    position: absolute;
+    top: 5%; left: 0; bottom: 50%; right: 7%;
+    display: flex;
+    height: 50%;
+    justify-content: center;
+    align-items: center;
+}
+
+.font{
+    color:#16ACC9;
+    font-size:150px;
+    -webkit-text-stroke: #002A46 2px;
+}

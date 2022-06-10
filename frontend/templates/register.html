@@ -1,8 +1,22 @@
+{% load static %}
 <html lang="en"> 
 <head> 
     <title>Регистрация в лучшем кликере</title> 
+    <link rel="stylesheet" href="{% static 'css/register.css' %}" type="text/css">
+    <style>
+        body {
+            background-image: url("{% static 'img/background_space.png' %}"); /* Цвет фона и путь к файлу */
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            color: #fff;
+        }
+        </style>
 </head> 
 <body>
+    <img class='pickle' src= "{% static 'img/pickle.png' %}" id="pickle" >
+    <img class='head' src= "{% static 'img/head.png' %}" id="head">
+    <div class="newcontainer">
     <h1>Регистрация</h1>
     {% if form.errors %} 
         <p>{{form.errors}}</p> 
@@ -12,6 +26,7 @@
         {{ form.as_p }} 
         <input type="submit"> 
     </form> 
-    <a href="{% url 'login' %}">Зарегистрирован?</a>
+    <a href="{% url 'login' %}" style="color: #fff;">Зарегистрирован?</a>
+</div>
 </body> 
 </html>

@@ -1,0 +1,141 @@
+body{
+    background-image: url("{% static 'img/background.png' %}");
+}
+.app {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+.nav {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    height: 100%;
+    padding-top: 5px;
+    padding-left: 15px;
+}
+.container {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.boosts {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    height: 100%;
+    
+}
+
+.newcontainer {
+    margin: auto;
+    position: absolute;
+    top: 115%; left: 0; bottom: 40%; right: 7%;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    height: 50%;
+    justify-content: center;
+    align-items: center;
+}
+
+.meeseeks{
+    width: 50%;
+}
+.meeseekshead{
+    width: 90%;
+}
+.achiev1{
+    width: 84%;
+}
+.achiev2{
+    width: 100%;
+}
+.achiev3{
+    width: 110%;
+}
+.achiev4{
+    width: 105%;
+}
+.achiev5{
+    width: 95%;
+}
+.achiev6{
+    width: 90%;
+}
+.achiev{
+    width: 50%;
+}
+.drac{
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 40%; right: 7%;
+    display: flex;
+    flex: 1;
+    height: 50%;
+    cursor: pointer;
+}
+.boost_0{
+    background-color: #f0e14a;
+    border-radius: 10px;
+    border: 2px solid rgb(0, 0, 0);
+    cursor: pointer;
+    width: 20%;
+}
+.boost_1{
+    background-color: rgb(66, 197, 214);
+    border-radius: 10px;
+    border: 2px solid rgb(0, 0, 0);
+    cursor: pointer;
+    width: 20%;
+}
+h3{
+    text-align: center;
+    
+}
+.save{
+    height: 4%;
+    border-radius: 10px;
+    border: 0px;
+    background-color: #f0e14a;
+}
+.save:active{
+    background-color: rgb(241, 191, 98);
+}
+.power_d{
+    border: 0px;
+    background-color: rgb(241, 191, 98);
+    border-radius: 20px;
+    text-align: center;
+    width: 20%;
+}
+.power_ab{
+    background-color: rgb(66, 197, 214);
+    border: 0px;
+    border-radius: 20px;
+    text-align: center;
+    width: 20%;
+}
+.simpetext{
+    height: 2%;
+    font-size:21px;
+    color:#080808;
+    -webkit-text-stroke: #141212 1px;
+}
+
+.font{
+    height: 2%;
+    font-size:38px;
+    color:#00bfff;
+    -webkit-text-stroke: #002A46 1px;
+}
+.font1{
+    height: 2%;
+    font-size:38px;
+    color:#00bfff;
+    -webkit-text-stroke: #002A46 1px;
+}

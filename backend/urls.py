@@ -17,5 +17,7 @@ urlpatterns = [
     path('call_click/', views.call_click),
     path('', views.index, name='index'),
     path('boost/<int:pk>/', lonely_boost, name='boost'),
-    path('boosts/', boosts, name='boosts')
+    path('boosts/', boosts, name='boosts'),
+    path('update_coins/', views.update_coins),
+    path('core/', views.get_core)
 ]

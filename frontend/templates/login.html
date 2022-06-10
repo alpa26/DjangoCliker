@@ -1,9 +1,23 @@
+{% load static %}
 <html lang="en"> 
 <head> 
     <title>Авторизация в лучшем кликере</title> 
+    <link rel="stylesheet" href="{% static 'css/login.css' %}" type="text/css">
+    <style>
+        body {
+        background-image: url("{% static 'img/background.png' %}"); /* Цвет фона и путь к файлу */
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        color: #fff; /* Цвет текста */
+        }
+        </style>
 </head> 
 <body> 
-    <h1>Авторизация</h1>
+    <div class="text">
+        <h1 class="font"> Welcome</h1>
+    </div>
+    <div class="newcontainer">
     <form action="{% url 'login' %}" method='POST'> 
         {% csrf_token %} 
         {{ form.username }} 
@@ -13,6 +27,7 @@
         {% endif %} 
         <input type="submit"> 
     </form>
-    <a href="{% url 'register' %}">Не зарегистрирован?</a>
+    <a href="{% url 'register' %}" style="color: #000000; font: size 5px;">Не зарегистрирован?</a>
+    </div>
 </body> 
 </html>
